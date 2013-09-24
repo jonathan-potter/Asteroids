@@ -9,19 +9,23 @@
     this.radius = radius;
     this.pos = [Asteroids.DIM_X/2, Asteroids.DIM_Y/2];
     this.vel = [0, 0];
-    this.direction = Math.PI / 2;
+    this.direction = Math.PI * 3 / 2;
   }
 
+  Ship.inherits(Asteroids.MovingObject);
+
+
   Ship.prototype.draw = function (ctx) {
-    ctx.fillStyle = this.color;
+    console.log("this is where the ship should draw")
+    ctx.fillStyle = "green";
     ctx.beginPath();
 
     ctx.arc(
       this.pos[0],
       this.pos[1],
       this.radius,
-      this.direction,
-      2,
+      this.direction + Math.PI * 1 / 4,
+      this.direction - Math.PI * 1 / 4,
       false
     );
 
@@ -29,7 +33,6 @@
   }
 
 
-  Ship.inherits(Asteroids.MovingObject);
 
   Ship.createShip = function () {
     return new Ship();
@@ -47,8 +50,8 @@
 
   Ship.prototype.updateVelocity = function() {
     var power = key.isPressed("up")
-    impulseX = power * Math.cos(this.direction) * 0.01
-    impulseY = power * Math.sin(this.direction) * 0.01
+    impulseX = power * Math.cos(this.direction) * 0.05
+    impulseY = power * Math.sin(this.direction) * 0.05
 
     this.vel[0] = this.vel[0] + impulseX;
     this.vel[1] = this.vel[1] + impulseY;
