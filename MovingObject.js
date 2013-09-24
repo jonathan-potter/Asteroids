@@ -35,7 +35,7 @@
     var yDist = (this.pos[1] - otherObject.pos[1]);
     var distance = Math.pow(xDist * xDist + yDist * yDist,0.5);
 
-    return (distance < (this.radius + otherObject.radius));
+    return (distance < (this.RADIUS + otherObject.RADIUS));
   }
 })(this);
 

@@ -6,19 +6,19 @@
 
   var Game = Asteroids.Game = function (canvasEl){
     this.ctx = canvasEl.getContext("2d");
-    this.asteroids = [];
-    this.DIM_X = Asteroids.DIM_X;
-    this.DIM_Y = Asteroids.DIM_Y;
+    this.asteroids = [];    //
+    // this.DIM_X = Asteroids.DIM_X;
+    // this.DIM_Y = Asteroids.DIM_Y;
   }
 
   Game.prototype.addAsteroids = function (numAsteroids) {
     for (var i = 0; i < numAsteroids; i++) {
-      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(this.DIM_X, this.DIM_Y) )
+      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(Asteroids.DIM_X, Asteroids.DIM_Y) )
     }
   }
 
   Game.prototype.draw = function () {
-    this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+    this.ctx.clearRect(0, 0, Asteroids.DIM_X, Asteroids.DIM_Y);
     for (var i = 0; i < this.asteroids.length; i++){
       this.asteroids[i].draw(this.ctx);
     }
@@ -35,13 +35,30 @@
   Game.prototype.step = function() {
     this.move();
     this.draw();
+    if (this.checkCollisions()) {
+      this.stop();
+      // alert('deadsies!')
+    }
   }
 
   Game.prototype.start = function() {
     var game = this;
     this.ship = Asteroids.Ship.createShip();
     this.addAsteroids(10);
-    window.setInterval(game.step.bind(game), 16);
+    this.intervalId = window.setInterval(game.step.bind(game), 16);
+  }
+
+  Game.prototype.stop = function () {
+    window.clearInterval(this.intervalId)
+  }
+
+  Game.prototype.checkCollisions = function() {
+    for (var i = 0; i < this.asteroids.length; i++) {
+      if (this.ship.isCollidedWith(this.asteroids[i])) {
+        return true
+      }
+    }
+    return false;
   }
 
 })(this);
