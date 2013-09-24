@@ -1,26 +1,31 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var COLOR = 'black';
+  var COLOR = 'grey';
   var RADIUS = 20;
 
-  function Asteroid(pos, vel){
+
+  var Asteroid = Asteroids.Asteroid = function (pos, vel){
+    console.log("creating asteroid")
     this.pos = pos;
     this.vel = vel;
-
-    MovingObject.call(this, pos, vel, RADIUS, COLOR);
+    this.COLOR = COLOR;
+    this.RADIUS = RADIUS;
+    // MovingObject.call(this, pos, vel, RADIUS, COLOR);
   }
 
-  Asteroid.inherits(MovingObject);
+  Asteroid.inherits(Asteroids.MovingObject);
 
   // Asteroid.prototype = new MovingObject(, this.vel, RADIUS, COLOR)
 
-  Asteroid.prototype.randomAsteroid = function (dimX, dimY) {
-    var x = Math.random(dimX);
-    var y = Math.random(dimY);
+  Asteroid.randomAsteroid = function (dimX, dimY) {
+    var x = Math.floor(Math.random() * dimX);
+    var y = Math.floor(Math.random() * dimY);
     var dx = Math.random() * 2 - 1 ;
     var dy = Math.random() * 2 - 1;
-    return new Asteroid([x, y], [dx, dy]);
+
+    var newAsteroid = new Asteroid([x, y], [dx, dy]);
+    return newAsteroid;
   }
 
 })(this);

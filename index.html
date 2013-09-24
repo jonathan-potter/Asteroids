@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script src="helper.js"></script>
+    <script src="game.js"></script>
+    <script src="MovingObject.js"></script>
+    <script src="Asteroid.js"></script>
+    <script src="ship.js"></script>
+
+  </head>
+  <body>
+    <style>
+    canvas {
+      border: 1px solid black;
+    }
+    </style>
+
+    <script>
+      var canvas = document.createElement("canvas");
+      canvas.setAttribute("width", "600");
+      canvas.setAttribute("height", "600");
+
+      var body = document.getElementsByTagName("body")[0];
+      body.appendChild(canvas);
+
+      var game = new Asteroids.Game(canvas)
+      game.start();
+    </script>
+  </body>
+</html>
