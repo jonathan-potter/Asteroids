@@ -32,6 +32,13 @@
     this.ship.move();
   }
 
+  Game.prototype.fireBullet = function () {
+    console.log('game#fireBullet');
+    var bullet = this.ship.fireBullet();
+
+    this.asteroids.push(bullet);
+  }
+
   Game.prototype.step = function() {
     this.move();
     this.draw();
@@ -43,7 +50,6 @@
   }
 
   Game.prototype.removeOutOfBounds = function (){
-    console.log(this.asteroids.length);
     var newAsteroidsArray = []
     for (var i = 0; i < this.asteroids.length; i++) {
       if ( !this.asteroids[i].outOfBounds() ) {
@@ -53,6 +59,15 @@
 
     this.asteroids = newAsteroidsArray;
   }
+
+  Game.prototype.bindKeyHandlers = function () {
+    var game = this;
+    key('a', function(){ alert('you pressed a!') });
+    key('space', function(){
+      game.fireBullet();
+     });
+  }
+
 
   Game.prototype.start = function() {
     var game = this;
@@ -66,9 +81,6 @@
     window.clearInterval(this.intervalId)
   }
 
-  Game.prototype.bindKeyHandlers = function () {
-    // key('up', function(){ alert('you pressed up!') });
-  }
 
   Game.prototype.checkCollisions = function() {
     for (var i = 0; i < this.asteroids.length; i++) {

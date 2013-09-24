@@ -13,8 +13,8 @@
 
   Bullet.inherits(Asteroids.MovingObject);
 
-  Bullet.createBullet = function () {
-    return new Bullet();
+  Bullet.createBullet = function (pos, vel) {
+    return new Bullet(pos, vel);
   }
 
 })(this);
