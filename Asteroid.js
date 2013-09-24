@@ -6,7 +6,6 @@
 
 
   var Asteroid = Asteroids.Asteroid = function (pos, vel){
-    console.log("creating asteroid")
     this.pos = pos;
     this.vel = vel;
     this.color = color;

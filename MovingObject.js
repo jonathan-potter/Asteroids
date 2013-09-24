@@ -6,7 +6,6 @@
     this.vel = vel;
     this.radius = radius;
     this.color = color;
-    console.log(color)
   }
 
   MovingObject.prototype.move = function () {
@@ -48,7 +47,4 @@
 
 })(this);
 
-// MO = new MovingObject([100,100],[0,10],50,"red");
-// OO = new MovingObject([100,100],[0,10],50,"red");
-// console.log(MO.isCollidedWith(OO));
 

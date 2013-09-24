@@ -66,13 +66,12 @@
 
     var offsetX = 2 * radius * Math.cos(this.direction);
     var offsetY = 2 * radius * Math.sin(this.direction);
-    var velX = 2 * Math.cos(this.direction);
-    var velY = 2 * Math.sin(this.direction);
+    var velX = Math.cos(this.direction);
+    var velY = Math.sin(this.direction);
 
     var bullet = Asteroids.Bullet.createBullet(
       [this.pos[0] + offsetX, this.pos[1] + offsetY],
       [velX, velY]);
-    console.log(bullet);
     return bullet;
   }
 
