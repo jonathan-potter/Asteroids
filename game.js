@@ -37,8 +37,21 @@
     this.draw();
     if (this.checkCollisions()) {
       this.stop();
-      // alert('deadsies!')
     }
+    this.removeOutOfBounds();
+
+  }
+
+  Game.prototype.removeOutOfBounds = function (){
+    console.log(this.asteroids.length);
+    var newAsteroidsArray = []
+    for (var i = 0; i < this.asteroids.length; i++) {
+      if ( !this.asteroids[i].outOfBounds() ) {
+        newAsteroidsArray.push(this.asteroids[i])
+      }
+    }
+
+    this.asteroids = newAsteroidsArray;
   }
 
   Game.prototype.start = function() {

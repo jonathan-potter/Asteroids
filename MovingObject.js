@@ -37,6 +37,15 @@
 
     return (distance < (this.RADIUS + otherObject.RADIUS));
   }
+
+  MovingObject.prototype.outOfBounds = function () {
+    var obx = this.pos[0] < (0 - this.RADIUS) ||
+      (Asteroids.DIM_X + this.RADIUS) < this.pos[0];
+    var oby = this.pos[1] < (0 - this.RADIUS) ||
+      (Asteroids.DIM_Y + this.RADIUS) < this.pos[1];
+    return (obx || oby);
+  }
+
 })(this);
 
 // MO = new MovingObject([100,100],[0,10],50,"red");
