@@ -1,37 +1,41 @@
-function MovingObject (pos, vel, radius, color) {
-  this.pos = pos;
-  this.vel = vel;
-  this.radius = radius;
-  this.color = color;
-}
+(function (root) {
+  var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-MovingObject.prototype.move = function () {
-  this.pos[0] += vel[0];
-  this.pos[1] += vel[1];
-}
+  var MovingObject = Asteroids.MovingObject = function (pos, vel, radius, color) {
+    this.pos = pos;
+    this.vel = vel;
+    this.radius = radius;
+    this.color = color;
+  }
 
-MovingObject.prototype.draw = function (ctx) {
-  ctx.fillStyle = this.color;
-  ctx.beginPath();
+  MovingObject.prototype.move = function () {
+    this.pos[0] += vel[0];
+    this.pos[1] += vel[1];
+  }
 
-  ctx.arc(
-    this.pos[0],
-    this.pos[1],
-    this.radius,
-    0,
-    2 * Math.PI
-  );
+  MovingObject.prototype.draw = function (ctx) {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
 
-  ctx.fill();
-}
+    ctx.arc(
+      this.pos[0],
+      this.pos[1],
+      this.radius,
+      0,
+      2 * Math.PI
+    );
 
-MovingObject.prototype.isCollidedWith = function (otherObject) {
-  var xDist = (this.pos[0] - otherObject.pos[0]);
-  var yDist = (this.pos[1] - otherObject.pos[1]);
-  var distance = Math.pow(xDist * xDist + yDist * yDist,0.5);
+    ctx.fill();
+  }
 
-  return (distance < (this.radius + otherObject.radius));
-}
+  MovingObject.prototype.isCollidedWith = function (otherObject) {
+    var xDist = (this.pos[0] - otherObject.pos[0]);
+    var yDist = (this.pos[1] - otherObject.pos[1]);
+    var distance = Math.pow(xDist * xDist + yDist * yDist,0.5);
+
+    return (distance < (this.radius + otherObject.radius));
+  }
+})(this);
 
 // MO = new MovingObject([100,100],[0,10],50,"red");
 // OO = new MovingObject([100,100],[0,10],50,"red");
