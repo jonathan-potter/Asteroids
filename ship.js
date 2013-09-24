@@ -9,8 +9,23 @@
     this.radius = radius;
     this.pos = [Asteroids.DIM_X/2, Asteroids.DIM_Y/2];
     this.vel = [0, 0];
+    this.direction = Math.PI / 2;
+  }
 
-    this.impulse = [0.002, 0.003];
+  Ship.prototype.draw = function (ctx) {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+
+    ctx.arc(
+      this.pos[0],
+      this.pos[1],
+      this.radius,
+      this.direction,
+      2,
+      false
+    );
+
+    ctx.fill();
   }
 
 
@@ -21,11 +36,34 @@
   }
 
   Ship.prototype.move = function () {
-    this.vel[0] = this.vel[0] + this.impulse[0];
-    this.vel[1] = this.vel[1] + this.impulse[1];
+    this.updateDirection();
+    this.updateVelocity();
 
     this.pos[0] = this.pos[0] + this.vel[0];
     this.pos[1] = this.pos[1] + this.vel[1];
+
+
+  }
+
+  Ship.prototype.updateVelocity = function() {
+    var power = key.isPressed("up")
+    impulseX = power * Math.cos(this.direction) * 0.01
+    impulseY = power * Math.sin(this.direction) * 0.01
+
+    this.vel[0] = this.vel[0] + impulseX;
+    this.vel[1] = this.vel[1] + impulseY;
+  }
+
+  Ship.prototype.updateDirection = function(){
+    var turn = 0;
+    if(key.isPressed("left")) {
+      turn += Math.PI / 18;
+    };
+    if(key.isPressed("right")) {
+      turn -= Math.PI / 18;
+    };
+    this.direction += turn;
+    console.log(this.direction)
   }
 
 

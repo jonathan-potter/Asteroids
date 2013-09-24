@@ -58,7 +58,7 @@
     var game = this;
     this.ship = Asteroids.Ship.createShip();
     this.addAsteroids(10);
-    this.bindKeyHandlers()
+    this.bindKeyHandlers();
     this.intervalId = window.setInterval(game.step.bind(game), 16);
   }
 
@@ -67,7 +67,7 @@
   }
 
   Game.prototype.bindKeyHandlers = function () {
-    // key('a', function(){ alert('you pressed a!') });
+    // key('up', function(){ alert('you pressed up!') });
   }
 
   Game.prototype.checkCollisions = function() {
