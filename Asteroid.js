@@ -1,22 +1,22 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var COLOR = 'grey';
-  var RADIUS = 20;
+  var color = 'grey';
+  var radius = 20;
 
 
   var Asteroid = Asteroids.Asteroid = function (pos, vel){
     console.log("creating asteroid")
     this.pos = pos;
     this.vel = vel;
-    this.COLOR = COLOR;
-    this.RADIUS = RADIUS;
-    // MovingObject.call(this, pos, vel, RADIUS, COLOR);
+    this.color = color;
+    this.radius = radius;
+    // MovingObject.call(this, pos, vel, radius, color);
   }
 
   Asteroid.inherits(Asteroids.MovingObject);
 
-  // Asteroid.prototype = new MovingObject(, this.vel, RADIUS, COLOR)
+  // Asteroid.prototype = new MovingObject(, this.vel, radius, color)
 
   Asteroid.randomAsteroid = function (dimX, dimY) {
     var x = Math.floor(Math.random() * dimX);

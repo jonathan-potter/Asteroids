@@ -1,12 +1,12 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var COLOR = 'red';
-  var RADIUS = 20;
+  var color = 'red';
+  var radius = 20;
 
   var Ship = Asteroids.Ship = function (){
-    this.COLOR = COLOR;
-    this.RADIUS = RADIUS;
+    this.color = color;
+    this.radius = radius;
     this.pos = [Asteroids.DIM_X/2, Asteroids.DIM_Y/2];
     this.vel = [0, 0];
 
