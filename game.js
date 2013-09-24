@@ -51,6 +51,7 @@
     }
     this.removeOutOfBounds();
     this.removeCollidingBulletsAndAsteroids();
+    this.resetOutOfBoundsShip();
   }
 
   Game.prototype.removeOutOfBounds = function (){
@@ -69,6 +70,24 @@
 
     this.bullets = newBulletsArray;
     this.asteroids = newAsteroidsArray;
+  }
+
+  Game.prototype.resetOutOfBoundsShip = function (){
+    if (this.ship.outOfBounds()) {
+      if (this.ship.pos[0] < 0) {
+        this.ship.pos[0] += Asteroids.DIM_X + this.ship.radius * 2
+      }
+      else if (this.ship.pos[0] > Asteroids.DIM_X) {
+        this.ship.pos[0] -= Asteroids.DIM_X + this.ship.radius * 2
+      }
+      if (this.ship.pos[1] < 0) {
+        this.ship.pos[1] += Asteroids.DIM_Y + this.ship.radius * 2
+      }
+      else if (this.ship.pos[1] > Asteroids.DIM_Y) {
+        this.ship.pos[1] -= Asteroids.DIM_Y + this.ship.radius * 2
+      }
+
+    }
   }
 
   Game.prototype.bindKeyHandlers = function () {

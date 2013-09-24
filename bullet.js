@@ -1,7 +1,7 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var color = 'black';
+  var color = 'orange';
   var radius = 5;
   var bulletSpeed = 5;
 

@@ -1,8 +1,9 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var color = 'red';
+  var color = 'white';
   var radius = 20;
+  var acceleration = 0.10
 
   var Ship = Asteroids.Ship = function (){
     this.color = color;
@@ -15,7 +16,7 @@
   Ship.inherits(Asteroids.MovingObject);
 
   Ship.prototype.draw = function (ctx) {
-    ctx.fillStyle = "green";
+    ctx.fillStyle = color;
     ctx.beginPath();
 
     ctx.arc(
@@ -43,9 +44,9 @@
   }
 
   Ship.prototype.updateVelocity = function() {
-    var power = key.isPressed("up")
-    impulseX = power * Math.cos(this.direction) * 0.05
-    impulseY = power * Math.sin(this.direction) * 0.05
+    var power = key.isPressed("up");
+    impulseX = power * Math.cos(this.direction) * acceleration;
+    impulseY = power * Math.sin(this.direction) * acceleration;
 
     this.vel[0] = this.vel[0] + impulseX;
     this.vel[1] = this.vel[1] + impulseY;
