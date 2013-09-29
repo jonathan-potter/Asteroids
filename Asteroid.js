@@ -48,21 +48,34 @@
     return newAsteroid;
   }
 
+  Asteroid.createAsteroid = function (pos, vel, radius, hit_points) {
+    return new Asteroid(pos, vel, radius, hit_points);
+  }
+
   Asteroid.prototype.makeShards = function () {
     var shards = [];
+    direction = Math.random() * 2 * Math.PI;
+    // console.log("original vel: " + this.vel)
+
     for (var i = 0; i < this.shardCount; i++) {
-      direction = Math.random() * 2 * Math.PI;
+      angleOffset = i * 2 / 3 * Math.PI;
 
-      dirX = Math.cos(direction);
-      dirY = Math.sin(direction);
+      dx = Math.cos(direction + angleOffset);
+      dy = Math.sin(direction + angleOffset);
 
-      shards.push(new Asteroid(this.pos,
-                               [dirX, dirY],
-                               this.radius * 2/3,
-                               this.hitPoints - 1));
+      vel = [dx, dy];
+
+      // console.log("new vel: " + vel);
+
+      var newAsteroid = Asteroid.createAsteroid(this.pos.slice(),
+                                                vel,
+                                                this.radius / 2,
+                                                this.hitPoints - 1);
+      shards.push(newAsteroid);
     }
 
-    return shards
+    // console.log(shards);
+    return shards;
   }
 
 })(this);

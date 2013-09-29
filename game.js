@@ -99,6 +99,7 @@
   }
 
   Game.prototype.stop = function () {
+    console.log(this.asteroids)
     window.clearInterval(this.intervalId)
   }
 
@@ -106,15 +107,15 @@
     this.move();
     this.draw();
     if (this.checkCollisions()) {
-      this.stop();
+      // this.stop();
     }
     this.removeOutOfBounds();
     collisions = this.detectBulletAsteroidCollisions()
     asteroidsToRemove = collisions[0];
-    bulletsToRemove = collisions[1];
+    // bulletsToRemove = collisions[1];
     this.removeCollidingAsteroids(asteroidsToRemove);
-    this.removeCollidingBullets(bulletsToRemove);
-    this.addAsteroids(10 - this.asteroids.length)
+    // this.removeCollidingBullets(bulletsToRemove);
+    this.addAsteroids(300 - this.asteroids.length)
     this.resetOutOfBoundsShip();
   }
 
@@ -147,6 +148,10 @@
     for (var i = 0; i < this.asteroids.length; i++ ) {
       if (asteroidsToRemove.indexOf(i) === -1) {
         newAsteroidsArray.push(this.asteroids[i]);
+      } else {
+        console.log(newAsteroidsArray.length)
+        newAsteroidsArray = newAsteroidsArray.concat(this.asteroids[i].makeShards())
+        console.log(newAsteroidsArray.length)
       }
     }
     this.asteroids = newAsteroidsArray;
