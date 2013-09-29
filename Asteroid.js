@@ -1,19 +1,19 @@
 (function (root) {
-  var Asteroids = root.Asteroids = (root.Asteroids || {});
+  var AG = root.AG = (root.AG || {});
 
   var color = 'grey';
   var radius = 10;
 
 
-  var Asteroid = Asteroids.Asteroid = function (pos, vel){
+  var Asteroid = AG.Asteroid = function (pos, vel){
     this.pos = pos;
     this.vel = vel;
     this.color = color;
-    this.radius = Asteroids.DIM_X / 30;
+    this.radius = AG.DIM_X / 30;
     // MovingObject.call(this, pos, vel, radius, color);
   }
 
-  Asteroid.inherits(Asteroids.MovingObject);
+  Asteroid.inherits(AG.MovingObject);
 
   // Asteroid.prototype = new MovingObject(, this.vel, radius, color)
 
@@ -29,15 +29,15 @@
       if (pn == 0) {
         x = -radius;
       } else {
-        x = Asteroids.DIM_X + radius;
+        x = AG.DIM_X + radius;
       }
-      y = Math.random() * Asteroids.DIM_Y;
+      y = Math.random() * AG.DIM_Y;
     } else {        // y
-      x = Math.random() * Asteroids.DIM_X;
+      x = Math.random() * AG.DIM_X;
       if (pn == 0) {
         y = -radius;
       } else {
-        y = Asteroids.DIM_Y + radius;
+        y = AG.DIM_Y + radius;
       }
     }
 

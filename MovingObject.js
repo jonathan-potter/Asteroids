@@ -1,7 +1,7 @@
-(function (root) {
-  var Asteroids = root.Asteroids = (root.Asteroids || {});
+ (function (root) {
+  var AG = root.AG = (root.AG || {});
 
-  var MovingObject = Asteroids.MovingObject = function (pos, vel, radius, color) {
+  var MovingObject = AG.MovingObject = function (pos, vel, radius, color) {
     this.pos = pos;
     this.vel = vel;
     this.radius = radius;
@@ -43,9 +43,9 @@
 
   MovingObject.prototype.outOfBounds = function () {
     var obx = this.pos[0] < (0 - this.radius - 1) ||
-      (Asteroids.DIM_X + this.radius + 1) < this.pos[0];
+      (AG.DIM_X + this.radius + 1) < this.pos[0];
     var oby = this.pos[1] < (0 - this.radius - 1) ||
-      (Asteroids.DIM_Y + this.radius + 1) < this.pos[1];
+      (AG.DIM_Y + this.radius + 1) < this.pos[1];
     return (obx || oby);
   }
 

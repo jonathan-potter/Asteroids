@@ -1,19 +1,19 @@
 (function (root) {
-  var Asteroids = root.Asteroids = (root.Asteroids || {});
+  var AG = root.AG = (root.AG || {});
 
   var color = 'white';
   var radius = 10;
   var acceleration = 0.10
 
-  var Ship = Asteroids.Ship = function (){
+  var Ship = AG.Ship = function (){
     this.color = color;
-    this.radius = Asteroids.DIM_X/30;
-    this.pos = [Asteroids.DIM_X/2, Asteroids.DIM_Y/2];
+    this.radius = AG.DIM_X/30;
+    this.pos = [AG.DIM_X/2, AG.DIM_Y/2];
     this.vel = [0, 0];
     this.direction = Math.PI * 3 / 2;
   }
 
-  Ship.inherits(Asteroids.MovingObject);
+  Ship.inherits(AG.MovingObject);
 
   Ship.prototype.draw = function (ctx) {
     ctx.fillStyle = color;
@@ -76,7 +76,7 @@
     var velX = this.vel[0];
     var velY = this.vel[1];
 
-    var bullet = Asteroids.Bullet.createBullet([posX, posY],
+    var bullet = AG.Bullet.createBullet([posX, posY],
                                                [velX, velY],
                                                [dirX, dirY]);
     return bullet;

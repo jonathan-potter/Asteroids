@@ -1,10 +1,10 @@
 (function (root) {
-  var Asteroids = root.Asteroids = (root.Asteroids || {});
+  var AG = root.AG = (root.AG || {});
 
 
-  var Game = Asteroids.Game = function (canvasEl, width, height){
-    Asteroids.DIM_X = width;
-    Asteroids.DIM_Y = height;
+  var Game = AG.Game = function (canvasEl, width, height){
+    AG.DIM_X = width;
+    AG.DIM_Y = height;
 
     this.ctx = canvasEl.getContext("2d");
     this.asteroids = [];
@@ -13,12 +13,12 @@
 
   Game.prototype.addAsteroids = function (numAsteroids) {
     for (var i = 0; i < numAsteroids; i++) {
-      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(Asteroids.DIM_X, Asteroids.DIM_Y) )
+      this.asteroids.push(AG.Asteroid.randomAsteroid(AG.DIM_X, AG.DIM_Y) )
     }
   }
 
   Game.prototype.draw = function () {
-    this.ctx.clearRect(0, 0, Asteroids.DIM_X, Asteroids.DIM_Y);
+    this.ctx.clearRect(0, 0, AG.DIM_X, AG.DIM_Y);
     for (var i = 0; i < this.asteroids.length; i++){
       this.asteroids[i].draw(this.ctx);
     }
@@ -65,16 +65,16 @@
   Game.prototype.resetOutOfBoundsShip = function (){
     if (this.ship.outOfBounds()) {
       if (this.ship.pos[0] < 0) {
-        this.ship.pos[0] += Asteroids.DIM_X + this.ship.radius * 2
+        this.ship.pos[0] += AG.DIM_X + this.ship.radius * 2
       }
-      else if (this.ship.pos[0] > Asteroids.DIM_X) {
-        this.ship.pos[0] -= Asteroids.DIM_X + this.ship.radius * 2
+      else if (this.ship.pos[0] > AG.DIM_X) {
+        this.ship.pos[0] -= AG.DIM_X + this.ship.radius * 2
       }
       if (this.ship.pos[1] < 0) {
-        this.ship.pos[1] += Asteroids.DIM_Y + this.ship.radius * 2
+        this.ship.pos[1] += AG.DIM_Y + this.ship.radius * 2
       }
-      else if (this.ship.pos[1] > Asteroids.DIM_Y) {
-        this.ship.pos[1] -= Asteroids.DIM_Y + this.ship.radius * 2
+      else if (this.ship.pos[1] > AG.DIM_Y) {
+        this.ship.pos[1] -= AG.DIM_Y + this.ship.radius * 2
       }
 
     }
@@ -90,7 +90,7 @@
 
   Game.prototype.start = function() {
     var game = this;
-    this.ship = Asteroids.Ship.createShip();
+    this.ship = AG.Ship.createShip();
     this.addAsteroids(4);
     this.bindKeyHandlers();
     this.intervalId = window.setInterval(game.step.bind(game), 16);
