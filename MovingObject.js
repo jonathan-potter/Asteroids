@@ -49,6 +49,10 @@
     return (obx || oby);
   }
 
+  MovingObject.prototype.destroy = function () {
+    console.log("defined the destroy method in" + this.objectType)
+  }
+
 })(this);
 
 

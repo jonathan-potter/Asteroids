@@ -11,6 +11,7 @@
     this.pos = [AG.DIM_X/2, AG.DIM_Y/2];
     this.vel = [0, 0];
     this.direction = Math.PI * 3 / 2;
+    this.objectType = "Ship"
   }
 
   Ship.inherits(AG.MovingObject);

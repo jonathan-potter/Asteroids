@@ -10,12 +10,10 @@
     this.vel = vel;
     this.color = color;
     this.radius = AG.DIM_X / 30;
-    // MovingObject.call(this, pos, vel, radius, color);
+    this.objectType = "Asteroid"
   }
 
   Asteroid.inherits(AG.MovingObject);
-
-  // Asteroid.prototype = new MovingObject(, this.vel, radius, color)
 
   Asteroid.randomAsteroid = function (dimX, dimY) {
 
