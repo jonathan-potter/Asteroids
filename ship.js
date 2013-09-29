@@ -4,6 +4,9 @@
   var color = 'white';
   var radius = 10;
   var acceleration = 0.10
+  var verticies = [[2 * Math.PI *  0 /  2, 13],
+                   [2 * Math.PI *  7 / 16, 13],
+                   [2 * Math.PI *  9 / 16, 13]];
 
   var Ship = AG.Ship = function (){
     this.color = color;
@@ -17,19 +20,29 @@
   Ship.inherits(AG.MovingObject);
 
   Ship.prototype.draw = function (ctx) {
-    ctx.fillStyle = color;
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 3;
     ctx.strokeStyle = color;
     ctx.beginPath();
 
-    ctx.arc(
-      this.pos[0],
-      this.pos[1],
-      this.radius,
-      this.direction + Math.PI * 1 / 4,
-      this.direction - Math.PI * 1 / 4,
-      false
-    );
+    var angle =  this.direction + verticies[0][0];
+    var radius = verticies[0][1];
+    var x = this.pos[0] + radius * Math.cos(angle);
+    var y = this.pos[1] + radius * Math.sin(angle);
+
+    ctx.moveTo(x, y);
+    for (var i = 1; i < verticies.length; i++ ) {
+
+      var angle =  this.direction + verticies[i][0];
+      var radius = verticies[i][1];
+      var a = this.pos[0] + radius * Math.cos(angle);
+      var b = this.pos[1] + radius * Math.sin(angle);
+
+      console.log("x: " + x + " y: " + y)
+      console.log("angle: " + angle + " radius: " + radius)
+
+      ctx.lineTo(a, b);
+    }
+    ctx.closePath();
 
     ctx.stroke();
   }

@@ -149,9 +149,7 @@
       if (asteroidsToRemove.indexOf(i) === -1) {
         newAsteroidsArray.push(this.asteroids[i]);
       } else {
-        console.log(newAsteroidsArray.length)
         newAsteroidsArray = newAsteroidsArray.concat(this.asteroids[i].makeShards())
-        console.log(newAsteroidsArray.length)
       }
     }
     this.asteroids = newAsteroidsArray;
