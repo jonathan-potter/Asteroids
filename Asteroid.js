@@ -48,7 +48,7 @@
     return newAsteroid;
   }
 
-  MovingObject.prototype.makeShards = function () {
+  Asteroid.prototype.makeShards = function () {
     var shards = [];
     for (var i = 0; i < this.shardCount; i++) {
       direction = Math.random() * 2 * Math.PI;
