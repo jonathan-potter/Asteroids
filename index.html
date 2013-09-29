@@ -15,19 +15,24 @@
     <style>
     canvas {
       border: 1px solid black;
-      background-image: url('http://th01.deviantart.net/fs71/PRE/i/2011/017/6/f/starfield_stock_by_freelancah-d2k5mcu.jpg');
+      background-color: black;
     }
     </style>
 
     <script>
+
+      var width = 500;
+      var height = 500;
+
       var canvas = document.createElement("canvas");
-      canvas.setAttribute("width", "600");
-      canvas.setAttribute("height", "600");
+      canvas.setAttribute("width", width);
+      canvas.setAttribute("height", height);
 
       var body = document.getElementsByTagName("body")[0];
       body.appendChild(canvas);
 
-      var game = new Asteroids.Game(canvas)
+
+      var game = new Asteroids.Game(canvas, width, height)
       game.start();
     </script>
   </body>

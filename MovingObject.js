@@ -17,6 +17,10 @@
     ctx.fillStyle = this.color;
     ctx.beginPath();
 
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = this.color;
+
     ctx.arc(
       this.pos[0],
       this.pos[1],
@@ -26,7 +30,7 @@
       false
     );
 
-    ctx.fill();
+    ctx.stroke();
   }
 
   MovingObject.prototype.isCollidedWith = function (otherObject) {
@@ -38,10 +42,10 @@
   }
 
   MovingObject.prototype.outOfBounds = function () {
-    var obx = this.pos[0] < (0 - this.radius) ||
-      (Asteroids.DIM_X + this.radius) < this.pos[0];
-    var oby = this.pos[1] < (0 - this.radius) ||
-      (Asteroids.DIM_Y + this.radius) < this.pos[1];
+    var obx = this.pos[0] < (0 - this.radius - 1) ||
+      (Asteroids.DIM_X + this.radius + 1) < this.pos[0];
+    var oby = this.pos[1] < (0 - this.radius - 1) ||
+      (Asteroids.DIM_Y + this.radius + 1) < this.pos[1];
     return (obx || oby);
   }
 

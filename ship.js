@@ -2,12 +2,12 @@
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var color = 'white';
-  var radius = 20;
+  var radius = 10;
   var acceleration = 0.10
 
   var Ship = Asteroids.Ship = function (){
     this.color = color;
-    this.radius = radius;
+    this.radius = Asteroids.DIM_X/30;
     this.pos = [Asteroids.DIM_X/2, Asteroids.DIM_Y/2];
     this.vel = [0, 0];
     this.direction = Math.PI * 3 / 2;
@@ -17,6 +17,8 @@
 
   Ship.prototype.draw = function (ctx) {
     ctx.fillStyle = color;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = color;
     ctx.beginPath();
 
     ctx.arc(
@@ -28,7 +30,7 @@
       false
     );
 
-    ctx.fill();
+    ctx.stroke();
   }
 
   Ship.createShip = function () {
@@ -65,14 +67,18 @@
 
   Ship.prototype.fireBullet = function() {
 
-    var offsetX = 2 * radius * Math.cos(this.direction);
-    var offsetY = 2 * radius * Math.sin(this.direction);
-    var velX = Math.cos(this.direction);
-    var velY = Math.sin(this.direction);
+    var offsetX = radius * Math.cos(this.direction);
+    var offsetY = radius * Math.sin(this.direction);
+    var posX = this.pos[0] + offsetX;
+    var posY = this.pos[1] + offsetY;
+    var dirX = Math.cos(this.direction);
+    var dirY = Math.sin(this.direction);
+    var velX = this.vel[0];
+    var velY = this.vel[1];
 
-    var bullet = Asteroids.Bullet.createBullet(
-      [this.pos[0] + offsetX, this.pos[1] + offsetY],
-      [velX, velY]);
+    var bullet = Asteroids.Bullet.createBullet([posX, posY],
+                                               [velX, velY],
+                                               [dirX, dirY]);
     return bullet;
   }
 

@@ -2,20 +2,27 @@
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var color = 'orange';
-  var radius = 5;
-  var bulletSpeed = 5;
+  var radius = 2;
+  var bulletSpeed = 3;
 
-  var Bullet = Asteroids.Bullet = function (pos, vel){
+  var Bullet = Asteroids.Bullet = function (pos, vel, dir){
     this.color = color;
-    this.radius = radius;
+    this.radius = Asteroids.DIM_X / 120;
     this.pos = pos;
-    this.vel = [vel[0] * bulletSpeed, vel[1] * bulletSpeed];
+
+    // var velX = vel[0] + dir[0] * bulletSpeed;
+    // var velY = vel[1] + dir[1] * bulletSpeed;
+
+    var velX = dir[0] * bulletSpeed;
+    var velY = dir[1] * bulletSpeed;
+
+    this.vel = [velX,velY];
   }
 
   Bullet.inherits(Asteroids.MovingObject);
 
-  Bullet.createBullet = function (pos, vel) {
-    return new Bullet(pos, vel);
+  Bullet.createBullet = function (pos, vel, dir) {
+    return new Bullet(pos, vel, dir);
   }
 
 })(this);
