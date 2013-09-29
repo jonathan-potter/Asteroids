@@ -49,7 +49,7 @@
     return (obx || oby);
   }
 
-  MovingObject.prototype.destroy = function () {
+  MovingObject.prototype.makeShards = function () {
     console.log("defined the destroy method in" + this.objectType)
   }
 

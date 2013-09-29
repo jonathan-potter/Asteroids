@@ -13,7 +13,9 @@
 
   Game.prototype.addAsteroids = function (numAsteroids) {
     for (var i = 0; i < numAsteroids; i++) {
-      this.asteroids.push(AG.Asteroid.randomAsteroid(AG.DIM_X, AG.DIM_Y) )
+      this.asteroids.push(AG.Asteroid.randomAsteroid(AG.DIM_X,
+                                                     AG.DIM_Y,
+                                                     AG.DIM_X / 30));
     }
   }
 
