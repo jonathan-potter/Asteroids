@@ -2,6 +2,7 @@
   var AG = root.AG = (root.AG || {});
 
   var color = 'grey';
+  var hitPoints = 5;
 
   var Asteroid = AG.Asteroid = function (pos, vel, radius, hit_points){
     this.pos = pos;
@@ -44,7 +45,7 @@
     var dx = Math.random() * 2 - 1;
     var dy = Math.random() * 2 - 1;
 
-    var newAsteroid = new Asteroid([x, y], [dx, dy], radius, 3);
+    var newAsteroid = new Asteroid([x, y], [dx, dy], radius, hitPoints);
     return newAsteroid;
   }
 
@@ -54,27 +55,25 @@
 
   Asteroid.prototype.makeShards = function () {
     var shards = [];
-    direction = Math.random() * 2 * Math.PI;
-    // console.log("original vel: " + this.vel)
+    if (this.hitPoints > 0) {
+      direction = Math.random() * 2 * Math.PI;
 
-    for (var i = 0; i < this.shardCount; i++) {
-      angleOffset = i * 2 / 3 * Math.PI;
+      for (var i = 0; i < this.shardCount; i++) {
+        angleOffset = i * 2 / 3 * Math.PI;
 
-      dx = Math.cos(direction + angleOffset);
-      dy = Math.sin(direction + angleOffset);
+        dx = Math.cos(direction + angleOffset);
+        dy = Math.sin(direction + angleOffset);
 
-      vel = [dx, dy];
+        vel = [dx, dy];
 
-      // console.log("new vel: " + vel);
-
-      var newAsteroid = Asteroid.createAsteroid(this.pos.slice(),
-                                                vel,
-                                                this.radius / 2,
-                                                this.hitPoints - 1);
-      shards.push(newAsteroid);
+        var newAsteroid = Asteroid.createAsteroid(this.pos.slice(),
+                                                  vel,
+                                                  this.radius / 2,
+                                                  this.hitPoints - 1);
+        shards.push(newAsteroid);
+      }
     }
 
-    // console.log(shards);
     return shards;
   }
 
