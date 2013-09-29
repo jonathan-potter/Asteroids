@@ -34,13 +34,10 @@
 
       var angle =  this.direction + verticies[i][0];
       var radius = verticies[i][1];
-      var a = this.pos[0] + radius * Math.cos(angle);
-      var b = this.pos[1] + radius * Math.sin(angle);
+      var x = this.pos[0] + radius * Math.cos(angle);
+      var y = this.pos[1] + radius * Math.sin(angle);
 
-      console.log("x: " + x + " y: " + y)
-      console.log("angle: " + angle + " radius: " + radius)
-
-      ctx.lineTo(a, b);
+      ctx.lineTo(x, y);
     }
     ctx.closePath();
 
