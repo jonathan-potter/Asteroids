@@ -2,7 +2,7 @@
   var AG = root.AG = (root.AG || {});
 
   var color = 'grey';
-  var hitPoints = 5;
+  var hitPoints = 8;
 
   var Asteroid = AG.Asteroid = function (pos, vel, radius, hit_points){
     this.pos = pos;

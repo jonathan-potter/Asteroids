@@ -1,6 +1,8 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
+  var tickRate = 16.66
+  var spawnLimit = 300
 
   var Game = AG.Game = function (canvasEl, width, height){
     AG.DIM_X = width;
@@ -95,7 +97,7 @@
     this.ship = AG.Ship.createShip();
     this.addAsteroids(4);
     this.bindKeyHandlers();
-    this.intervalId = window.setInterval(game.step.bind(game), 16);
+    this.intervalId = window.setInterval(game.step.bind(game), tickRate);
   }
 
   Game.prototype.stop = function () {
@@ -115,7 +117,7 @@
     // bulletsToRemove = collisions[1];
     this.removeCollidingAsteroids(asteroidsToRemove);
     // this.removeCollidingBullets(bulletsToRemove);
-    this.addAsteroids(300 - this.asteroids.length)
+    this.addAsteroids(spawnLimit - this.asteroids.length)
     this.resetOutOfBoundsShip();
   }
 
