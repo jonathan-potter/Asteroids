@@ -3,13 +3,13 @@
 
   var color = 'grey';
 
-  var Asteroid = AG.Asteroid = function (pos, vel, radius){
+  var Asteroid = AG.Asteroid = function (pos, vel, radius, hit_points){
     this.pos = pos;
     this.vel = vel;
     this.color = color;
     this.radius = radius;
     this.objectType = "Asteroid";
-    this.hitPoints = 3;
+    this.hitPoints = hit_points;
     this.shardCount = 3;
   }
 
@@ -44,16 +44,25 @@
     var dx = Math.random() * 2 - 1;
     var dy = Math.random() * 2 - 1;
 
-    var newAsteroid = new Asteroid([x, y], [dx, dy], radius);
+    var newAsteroid = new Asteroid([x, y], [dx, dy], radius, 3);
     return newAsteroid;
   }
 
-  // MovingObject.prototype.makeShards = function () {
-  //   var shards = [];
-  //   for (var i = 0; i < this.shardCount; i++) {
-  //
-  //     shards.push(new Asteroid())
-  //   }
-  // }
+  MovingObject.prototype.makeShards = function () {
+    var shards = [];
+    for (var i = 0; i < this.shardCount; i++) {
+      direction = Math.random() * 2 * Math.PI;
+
+      dirX = Math.cos(direction);
+      dirY = Math.sin(direction);
+
+      shards.push(new Asteroid(this.pos,
+                               [dirX, dirY],
+                               this.radius * 2/3,
+                               this.hitPoints - 1));
+    }
+
+    return shards
+  }
 
 })(this);
