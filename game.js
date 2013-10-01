@@ -11,6 +11,7 @@
     this.ctx = canvasEl.getContext("2d");
     this.asteroids = [];
     this.bullets = [];
+    this.score = 0;
   }
 
   Game.prototype.addAsteroids = function (numAsteroids) {
@@ -30,6 +31,7 @@
       this.bullets[i].draw(this.ctx);
     }
     this.ship.draw(this.ctx);
+    this.updateScoreboard(this.ctx);
   }
 
   Game.prototype.move = function() {
@@ -101,7 +103,6 @@
   }
 
   Game.prototype.stop = function () {
-    console.log(this.asteroids)
     window.clearInterval(this.intervalId)
   }
 
@@ -166,6 +167,14 @@
     }
 
     this.bullets = newBulletsArray;
+  }
+
+  Game.prototype.updateScoreboard = function (ctx) {
+    ctx.fillStyle = "white";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "top";
+    ctx.font = "bold 16px Arial";
+    ctx.fillText(this.score, AG.DIM_X - 5, 5);
   }
 
 })(this);

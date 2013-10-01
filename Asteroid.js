@@ -54,6 +54,8 @@
   }
 
   Asteroid.prototype.makeShards = function () {
+    game.score += 1;
+
     var shards = [];
     if (this.hitPoints > 0) {
       direction = Math.random() * 2 * Math.PI;
