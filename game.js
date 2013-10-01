@@ -7,6 +7,7 @@
   var Game = AG.Game = function (canvasEl, width, height){
     AG.DIM_X = width;
     AG.DIM_Y = height;
+    AG.game = this;
 
     this.ctx = canvasEl.getContext("2d");
     this.asteroids = [];
@@ -31,7 +32,7 @@
       this.bullets[i].draw(this.ctx);
     }
     this.ship.draw(this.ctx);
-    this.updateScoreboard(this.ctx);
+    AG.Tick.updateScoreboard(this.ctx, this.score);
   }
 
   Game.prototype.move = function() {
@@ -87,11 +88,9 @@
   }
 
   Game.prototype.bindKeyHandlers = function () {
-    var game = this;
-    key('a', function(){ alert('you pressed a!') });
     key('space', function(){
-      game.fireBullet();
-     });
+      AG.game.fireBullet();
+    });
   }
 
   Game.prototype.start = function() {
@@ -109,15 +108,15 @@
   Game.prototype.step = function() {
     this.move();
     this.draw();
-    if (this.checkCollisions()) {
+    if (AG.Tick.checkCollisions(AG.game)) {
       // this.stop();
     }
     this.removeOutOfBounds();
-    collisions = this.detectBulletAsteroidCollisions()
+    collisions = AG.Tick.detectBulletAsteroidCollisions(AG.game)
     asteroidsToRemove = collisions[0];
-    // bulletsToRemove = collisions[1];
-    this.removeCollidingAsteroids(asteroidsToRemove);
-    // this.removeCollidingBullets(bulletsToRemove);
+    bulletsToRemove = collisions[1];
+    AG.Tick.removeCollidingAsteroids(AG.game, asteroidsToRemove);
+    AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
     this.addAsteroids(spawnLimit - this.asteroids.length)
     this.resetOutOfBoundsShip();
   }
