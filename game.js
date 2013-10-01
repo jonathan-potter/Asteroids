@@ -114,66 +114,11 @@
     this.removeOutOfBounds();
     collisions = AG.Tick.detectBulletAsteroidCollisions(AG.game)
     asteroidsToRemove = collisions[0];
-    bulletsToRemove = collisions[1];
+    // bulletsToRemove = collisions[1];
     AG.Tick.removeCollidingAsteroids(AG.game, asteroidsToRemove);
-    AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
+    // AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
     this.addAsteroids(spawnLimit - this.asteroids.length)
     this.resetOutOfBoundsShip();
-  }
-
-  Game.prototype.checkCollisions = function() {
-    for (var i = 0; i < this.asteroids.length; i++) {
-      if (this.ship.isCollidedWith(this.asteroids[i])) {
-        return true
-      }
-    }
-    return false;
-  }
-
-  Game.prototype.detectBulletAsteroidCollisions = function () {
-    var asteroidsToRemove = []
-    var bulletsToRemove = []
-    for (var bullet_index = 0; bullet_index < this.bullets.length; bullet_index++) {
-      for (var ast_index = 0; ast_index < this.asteroids.length; ast_index++) {
-        if ( this.bullets[bullet_index].isCollidedWith(this.asteroids[ast_index]) ) {
-          asteroidsToRemove.push(ast_index);
-          bulletsToRemove.push(bullet_index);
-        }
-      }
-    }
-
-    return [asteroidsToRemove, bulletsToRemove]
-  }
-
-  Game.prototype.removeCollidingAsteroids = function(asteroidsToRemove) {
-    var newAsteroidsArray = []
-    for (var i = 0; i < this.asteroids.length; i++ ) {
-      if (asteroidsToRemove.indexOf(i) === -1) {
-        newAsteroidsArray.push(this.asteroids[i]);
-      } else {
-        newAsteroidsArray = newAsteroidsArray.concat(this.asteroids[i].makeShards())
-      }
-    }
-    this.asteroids = newAsteroidsArray;
-  }
-
-  Game.prototype.removeCollidingBullets = function (bulletsToRemove) {
-    var newBulletsArray = []
-    for (var i = 0; i < this.bullets.length; i++ ) {
-      if (bulletsToRemove.indexOf(i) === -1) {
-        newBulletsArray.push(this.bullets[i]);
-      }
-    }
-
-    this.bullets = newBulletsArray;
-  }
-
-  Game.prototype.updateScoreboard = function (ctx) {
-    ctx.fillStyle = "white";
-    ctx.textAlign = "right";
-    ctx.textBaseline = "top";
-    ctx.font = "bold 16px Arial";
-    ctx.fillText(this.score, AG.DIM_X - 5, 5);
   }
 
 })(this);
