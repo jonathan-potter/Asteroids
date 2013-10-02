@@ -1,7 +1,7 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  var tickRate = 16.66;
+  var tickRate = 16;
   var spawnLimit = 300;
 
   var Game = AG.Game = function (canvasEl, width, height){

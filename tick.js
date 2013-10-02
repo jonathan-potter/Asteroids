@@ -1,6 +1,9 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
+  AG.lastUpdate = 0;  // frames per second update timer
+  AG.fps        = 0;  // initial frames per second
+
   var Tick = AG.Tick = {}
 
   Tick.checkCollisions = function (game) {
@@ -65,14 +68,18 @@
     var frameTime = currentTime - AG.lastTime;
     AG.lastTime = currentTime;
 
-    // convert time in ms to fps
-    var fps = Math.floor(1000/frameTime);
+    if (currentTime - AG.lastUpdate > 50) {
+      AG.lastUpdate = currentTime;
+
+      // convert time in ms to fps
+      AG.fps = Math.floor(1000/frameTime);
+    }
 
     ctx.fillStyle = "white";
     ctx.textAlign = "right";
     ctx.textBaseline = "top";
     ctx.font = "bold 16px Arial";
-    ctx.fillText(fps, AG.DIM_X - 5, 30);
+    ctx.fillText(AG.fps, AG.DIM_X - 5, 30);
   }
 
 })(this);
