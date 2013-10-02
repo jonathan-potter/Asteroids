@@ -3,10 +3,13 @@
 
   var color = 'white';
   var radius = 10;
-  var acceleration = 0.10
+  var acceleration = 0.10;
   var verticies = [[2 * Math.PI *  0 /  2, 13],
                    [2 * Math.PI *  7 / 16, 13],
                    [2 * Math.PI *  9 / 16, 13]];
+  var thrusterVerticies = [[2 * Math.PI *  15 / 32, 13],
+                           [2 * Math.PI *  16 / 32, 16],
+                           [2 * Math.PI *  17 / 32, 13]];
 
   var Ship = AG.Ship = function (){
     this.color = color;
@@ -20,6 +23,10 @@
   Ship.inherits(AG.MovingObject);
 
   Ship.prototype.draw = function (ctx) {
+    if (Ship.power) {
+      this.drawThrusterFlame(ctx);
+    }
+
     ctx.lineWidth = 3;
     ctx.strokeStyle = color;
     ctx.beginPath();
@@ -44,6 +51,32 @@
     ctx.stroke();
   }
 
+  Ship.prototype.drawThrusterFlame = function(ctx) {
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'orange';
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+
+    var angle =  this.direction + thrusterVerticies[0][0];
+    var radius = thrusterVerticies[0][1];
+    var x = this.pos[0] + radius * Math.cos(angle);
+    var y = this.pos[1] + radius * Math.sin(angle);
+
+    ctx.moveTo(x, y);
+    for (var i = 1; i < thrusterVerticies.length; i++ ) {
+
+      var angle =  this.direction + thrusterVerticies[i][0];
+      var radius = thrusterVerticies[i][1];
+      var x = this.pos[0] + radius * Math.cos(angle);
+      var y = this.pos[1] + radius * Math.sin(angle);
+
+      ctx.lineTo(x, y);
+    }
+
+    ctx.stroke();
+    ctx.fill();
+  }
+
   Ship.createShip = function () {
     return new Ship();
   }
@@ -57,9 +90,9 @@
   }
 
   Ship.prototype.updateVelocity = function() {
-    var power = key.isPressed("up");
-    impulseX = power * Math.cos(this.direction) * acceleration;
-    impulseY = power * Math.sin(this.direction) * acceleration;
+    Ship.power = key.isPressed("up");
+    impulseX = Ship.power * Math.cos(this.direction) * acceleration;
+    impulseY = Ship.power * Math.sin(this.direction) * acceleration;
 
     this.vel[0] = this.vel[0] + impulseX;
     this.vel[1] = this.vel[1] + impulseY;
