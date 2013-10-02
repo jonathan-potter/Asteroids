@@ -1,8 +1,8 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  var tickRate = 16.66
-  var spawnLimit = 300
+  var tickRate = 16.66;
+  var spawnLimit = 300;
 
   var Game = AG.Game = function (canvasEl, width, height){
     AG.DIM_X = width;
@@ -33,6 +33,7 @@
     }
     this.ship.draw(this.ctx);
     AG.Tick.updateScoreboard(this.ctx, this.score);
+    AG.Tick.updateFramesPerSecond(this.ctx);
   }
 
   Game.prototype.move = function() {

@@ -59,4 +59,20 @@
     ctx.fillText(score, AG.DIM_X - 5, 5);
   }
 
+  Tick.updateFramesPerSecond = function (ctx) {
+    var date = new Date();
+    var currentTime = date.getTime();
+    var frameTime = currentTime - AG.lastTime;
+    AG.lastTime = currentTime;
+
+    // convert time in ms to fps
+    var fps = Math.floor(1000/frameTime);
+
+    ctx.fillStyle = "white";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "top";
+    ctx.font = "bold 16px Arial";
+    ctx.fillText(fps, AG.DIM_X - 5, 30);
+  }
+
 })(this);
