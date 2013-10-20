@@ -81,30 +81,30 @@
     return new Ship();
   }
 
-  Ship.prototype.move = function () {
-    this.updateDirection();
-    this.updateVelocity();
+  Ship.prototype.move = function (time) {
+    this.updateDirection(time);
+    this.updateVelocity(time);
 
-    this.pos[0] = this.pos[0] + this.vel[0];
-    this.pos[1] = this.pos[1] + this.vel[1];
+    this.pos[0] = this.pos[0] + this.vel[0] * time;
+    this.pos[1] = this.pos[1] + this.vel[1] * time;
   }
 
-  Ship.prototype.updateVelocity = function() {
+  Ship.prototype.updateVelocity = function(time) {
     Ship.power = key.isPressed("up");
     impulseX = Ship.power * Math.cos(this.direction) * acceleration;
     impulseY = Ship.power * Math.sin(this.direction) * acceleration;
 
-    this.vel[0] = this.vel[0] + impulseX;
-    this.vel[1] = this.vel[1] + impulseY;
+    this.vel[0] = this.vel[0] + impulseX * time;
+    this.vel[1] = this.vel[1] + impulseY * time;
   }
 
-  Ship.prototype.updateDirection = function(){
+  Ship.prototype.updateDirection = function(time){
     var turn = 0;
     if(key.isPressed("left")) {
-      turn -= Math.PI / 30;
+      turn -= (Math.PI * time) / 30;
     };
     if(key.isPressed("right")) {
-      turn += Math.PI / 30;
+      turn += (Math.PI * time) / 30;
     };
     this.direction += turn;
   }
@@ -121,8 +121,8 @@
     var velY = this.vel[1];
 
     var bullet = AG.Bullet.createBullet([posX, posY],
-                                               [velX, velY],
-                                               [dirX, dirY]);
+                                        [velX, velY],
+                                        [dirX, dirY]);
     return bullet;
   }
 

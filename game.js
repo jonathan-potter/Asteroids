@@ -36,14 +36,14 @@
     AG.Tick.updateFramesPerSecond(this.ctx);
   }
 
-  Game.prototype.move = function() {
+  Game.prototype.move = function(time) {
     for (var i = 0; i < this.asteroids.length; i++){
-      this.asteroids[i].move();
+      this.asteroids[i].move(1);
     }
     for (var i = 0; i < this.bullets.length; i++){
-      this.bullets[i].move();
+      this.bullets[i].move(1);
     }
-    this.ship.move();
+    this.ship.move(1);
   }
 
   Game.prototype.fireBullet = function () {
@@ -107,7 +107,8 @@
   }
 
   Game.prototype.step = function() {
-    this.move();
+    var time = AG.Tick.timeSinceLastTick();
+    this.move(time);
     this.draw();
     if (AG.Tick.checkCollisions(AG.game)) {
       // this.stop();
@@ -120,6 +121,7 @@
     // AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
     this.addAsteroids(spawnLimit - this.asteroids.length)
     this.resetOutOfBoundsShip();
+    AG.Tick.lastFrameTime = AG.Tick.currentFrameTime();
   }
 
 })(this);

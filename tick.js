@@ -1,10 +1,23 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  AG.lastUpdate = 0;  // frames per second update timer
-  AG.fps        = 0;  // initial frames per second
-
   var Tick = AG.Tick = {}
+
+  Tick.lastFrameTime        = 0;  // time since last frame
+  Tick.lastFPSUpdateTime    = 0;  // time since last fps screen update
+  Tick.fps                  = 0;  // frames per second
+
+  ////////////////////////////// TRACK TIME ////////////////////////////////
+
+  Tick.currentFrameTime = function () {
+    return (new Date()).getTime();
+  }
+
+  Tick.timeSinceLastTick = function () {
+    return Tick.currentFrameTime() - Tick.lastFrameTime;
+  }
+
+  ////////////////////////////// COLLISIONS /////////////////////////////////
 
   Tick.checkCollisions = function (game) {
     for (var i = 0; i < game.asteroids.length; i++) {
@@ -54,6 +67,8 @@
     game.bullets = newBulletsArray;
   }
 
+  ////////////////////////////// DRAW SCORE AND FPS /////////////////////////
+
   Tick.updateScoreboard = function (ctx, score) {
     ctx.fillStyle = "white";
     ctx.textAlign = "right";
@@ -63,23 +78,18 @@
   }
 
   Tick.updateFramesPerSecond = function (ctx) {
-    var date = new Date();
-    var currentTime = date.getTime();
-    var frameTime = currentTime - AG.lastTime;
-    AG.lastTime = currentTime;
-
-    if (currentTime - AG.lastUpdate > 50) {
-      AG.lastUpdate = currentTime;
+    if (Tick.currentFrameTime() - Tick.lastFPSUpdateTime > 50) {
+      Tick.lastFPSUpdateTime = Tick.currentFrameTime();
 
       // convert time in ms to fps
-      AG.fps = Math.floor(1000/frameTime);
+      Tick.fps = Math.floor(1000/Tick.timeSinceLastTick());
     }
 
     ctx.fillStyle = "white";
     ctx.textAlign = "right";
     ctx.textBaseline = "top";
     ctx.font = "bold 16px Arial";
-    ctx.fillText(AG.fps, AG.DIM_X - 5, 30);
+    ctx.fillText(Tick.fps, AG.DIM_X - 5, 30);
   }
 
 })(this);
