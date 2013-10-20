@@ -9,15 +9,16 @@
     <script src="Asteroid.js"></script>
     <script src="ship.js"></script>
     <script src="tick.js"></script>
-    <div id="container"></div>
-    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.2.min.js"></script>
-    <script src="buttons.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
     <title>Asteroids</title>
 
   </head>
   <body>
+    <header>
+      <h1>Asteroid Sandbox</h1>
+    </header>
+    <main class="main" id="main"></main>
 
     <script>
 
@@ -28,13 +29,11 @@
       canvas.setAttribute("width", width);
       canvas.setAttribute("height", height);
 
-      var body = document.getElementsByTagName("body")[0];
-      body.appendChild(canvas);
+      var main = document.getElementById("main");
+      main.appendChild(canvas);
 
       var game = new AG.Game(canvas, width, height);
-      AG.Kinetic(function() {
-        game.start();
-      });
+      game.start();
 
     </script>
   </body>
