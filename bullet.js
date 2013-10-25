@@ -1,21 +1,21 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  var color = 'red';
-  var radius = 3;
-  var bulletSpeed = 3;
+  AG.bulletColor = 'red';
+  AG.bulletRadius = 3;
+  AG.bulletSpeed = 3;
 
   var Bullet = AG.Bullet = function (pos, vel, dir){
-    this.color = color;
-    this.radius = radius;
+    this.color = AG.bulletColor;
+    this.radius = AG.bulletRadius;
     this.pos = pos;
     this.objectType = "Bullet"
 
     // var velX = vel[0] + dir[0] * bulletSpeed;
     // var velY = vel[1] + dir[1] * bulletSpeed;
 
-    var velX = dir[0] * bulletSpeed;
-    var velY = dir[1] * bulletSpeed;
+    var velX = dir[0] * AG.bulletSpeed;
+    var velY = dir[1] * AG.bulletSpeed;
 
     this.vel = [velX,velY];
   }
