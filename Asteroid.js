@@ -1,13 +1,13 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  var color = 'grey';
-  var hitPoints = 8;
+  AG.color = 'grey';
+  AG.hitPoints = 8;
 
   var Asteroid = AG.Asteroid = function (pos, vel, radius, hit_points){
     this.pos = pos;
     this.vel = vel;
-    this.color = color;
+    this.color = AG.color;
     this.radius = radius;
     this.objectType = "Asteroid";
     this.hitPoints = hit_points;
@@ -45,7 +45,7 @@
     var dx = Math.random() * 2 - 1;
     var dy = Math.random() * 2 - 1;
 
-    var newAsteroid = new Asteroid([x, y], [dx, dy], radius, hitPoints);
+    var newAsteroid = new Asteroid([x, y], [dx, dy], radius, AG.hitPoints);
     return newAsteroid;
   }
 

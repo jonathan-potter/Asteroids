@@ -1,8 +1,11 @@
 (function (root) {
   var AG = root.AG = (root.AG || {});
 
-  var tickRate = 16;
-  var spawnLimit = 300;
+  AG.tickRate = 16;
+
+  AG.shipDies = false;
+  AG.bulletsDie = false;
+  AG.spawnLimit = 300;
 
   var Game = AG.Game = function (canvasEl, width, height){
     AG.DIM_X = width;
@@ -99,7 +102,7 @@
     this.ship = AG.Ship.createShip();
     this.addAsteroids(4);
     this.bindKeyHandlers();
-    this.intervalId = window.setInterval(game.step.bind(game), tickRate);
+    this.intervalId = window.setInterval(game.step.bind(game), AG.tickRate);
   }
 
   Game.prototype.stop = function () {
@@ -110,16 +113,19 @@
     var time = AG.Tick.timeSinceLastTick();
     this.move(time);
     this.draw();
-    if (AG.Tick.checkCollisions(AG.game)) {
-      // this.stop();
+    if (AG.shipDies && AG.Tick.checkCollisions(AG.game)) {
+      this.stop();
     }
     this.removeOutOfBounds();
     collisions = AG.Tick.detectBulletAsteroidCollisions(AG.game)
     asteroidsToRemove = collisions[0];
-    // bulletsToRemove = collisions[1];
+
+    if (AG.bulletsDie === "true") {
+      bulletsToRemove = collisions[1];
+      AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
+    }
     AG.Tick.removeCollidingAsteroids(AG.game, asteroidsToRemove);
-    // AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
-    this.addAsteroids(spawnLimit - this.asteroids.length)
+    this.addAsteroids(AG.spawnLimit - this.asteroids.length)
     this.resetOutOfBoundsShip();
     AG.Tick.lastFrameTime = AG.Tick.currentFrameTime();
   }

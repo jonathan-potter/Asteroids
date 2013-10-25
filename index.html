@@ -2,6 +2,7 @@
   <head>
 
     <script src="keymaster.min.js"></script>
+    <script src="jquery.js"></script>
     <script src="helper.js"></script>
     <script src="game.js"></script>
     <script src="MovingObject.js"></script>
@@ -9,16 +10,45 @@
     <script src="Asteroid.js"></script>
     <script src="ship.js"></script>
     <script src="tick.js"></script>
+    <script src="setup.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
     <title>Asteroids</title>
 
   </head>
   <body>
-    <header>
-      <h1>Asteroid Sandbox</h1>
-    </header>
-    <main class="main" id="main"></main>
+    <div class="wrapper">
+      <header>
+        <h1>Asteroid Sandbox</h1>
+      </header>
+      <main class="main" id="main"></main>
+      <select name="bubble_count" id="input_bubble_count">
+        <option value="5">5 bubbles</option>
+        <option value="20">20 bubbles</option>
+        <option value="100">100 bubbles</option>
+        <option value="200">200 bubbles</option>
+        <option value="300" selected>300 bubbles</option>
+      </select>
+      <select name="bullets_die" id="input_bullets_die">
+        <option value="false">bullets don't die</option>
+        <option value="true">bullets die</option>
+      </select>
+      <select name="ship_dies" id="input_ship_dies">
+        <option value="false">ship doesn't die</option>
+        <option value="true">ship dies</option>
+      </select>
+      <select name="generations" id="input_generations">
+        <option value="0">0 generations</option>
+        <option value="1">1 generations</option>
+        <option value="2">2 generations</option>
+        <option value="3">3 generations</option>
+        <option value="4">4 generations</option>
+        <option value="5">5 generations</option>
+        <option value="6">6 generations</option>
+        <option value="7">7 generations</option>
+        <option value="8" selected>8 generations</option>
+      </select>
+    </div>
 
     <script>
 

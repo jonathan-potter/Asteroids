@@ -1,4 +1,4 @@
-h1, main, canvas {
+h1, main, canvas,select,input,body,canvas,header {
   margin: 0;
   padding: 0;
   border: 0;
@@ -14,7 +14,6 @@ canvas {
 #main {
   width: 500px;
   height: 500px;
-  margin: auto;
   border-style:solid;
   border-color: white;
   padding: 0;
@@ -33,4 +32,14 @@ header > h1 {
   color: white;
   font-size: 40px;
   padding: 20px;
+}
+
+.wrapper {
+  width: 500px;
+  margin: auto;
+}
+
+select, input {
+  float: left;
+  margin: 3px;
 }
