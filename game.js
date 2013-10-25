@@ -98,15 +98,23 @@
   }
 
   Game.prototype.start = function() {
-    var game = this;
     this.ship = AG.Ship.createShip();
     this.addAsteroids(4);
     this.bindKeyHandlers();
-    this.intervalId = window.setInterval(game.step.bind(game), AG.tickRate);
+    this.intervalId = window.setInterval(game.step.bind(this), AG.tickRate);
   }
 
   Game.prototype.stop = function () {
-    window.clearInterval(this.intervalId)
+    window.clearInterval(this.intervalId);
+  }
+
+  Game.prototype.reset = function () {
+    this.stop();
+    this.asteroids = [];
+    this.bullets = [];
+    this.ship = AG.Ship.createShip();
+    // window.refreshIntervalId(this.intervalId);
+    this.intervalId = window.setInterval(game.step.bind(this), AG.tickRate);
   }
 
   Game.prototype.step = function() {

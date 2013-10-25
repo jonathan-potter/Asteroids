@@ -6,6 +6,16 @@ h1, main, canvas,select,input,body,canvas,header {
   font-size: inherit;
 }
 
+.button {
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.blue {
+  background: #22F;
+  color: white;
+}
+
 canvas {
   margin: 0;
   padding: 0;
