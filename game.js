@@ -113,6 +113,7 @@
     this.asteroids = [];
     this.bullets = [];
     this.ship = AG.Ship.createShip();
+    this.score = 0;
     this.intervalId = window.setInterval(game.step.bind(this), AG.tickRate);
   }
 
