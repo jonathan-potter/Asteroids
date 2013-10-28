@@ -18,38 +18,49 @@
     this.vel = [0, 0];
     this.direction = Math.PI * 3 / 2;
     this.objectType = "Ship"
-  }
+    this.verticies = verticies;
+  };
 
   Ship.inherits(AG.MovingObject);
+
+  Ship.prototype.pointsInContext = function () {
+    var points = [];
+
+    for (var i = 0; i < this.verticies.length; i++ ) {
+      var angle =  this.direction + verticies[i][0];
+      var radius = verticies[i][1];
+      var x = this.pos[0] + radius * Math.cos(angle);
+      var y = this.pos[1] + radius * Math.sin(angle);
+
+      points.push([x, y]);
+    }
+
+    return points;
+  };
 
   Ship.prototype.draw = function (ctx) {
     if (Ship.power) {
       this.drawThrusterFlame(ctx);
     }
+    var points = this.pointsInContext();
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 1;
     ctx.strokeStyle = color;
     ctx.beginPath();
 
-    var angle =  this.direction + verticies[0][0];
-    var radius = verticies[0][1];
-    var x = this.pos[0] + radius * Math.cos(angle);
-    var y = this.pos[1] + radius * Math.sin(angle);
-
+    x = points[0][0];
+    y = points[0][1];
     ctx.moveTo(x, y);
-    for (var i = 1; i < verticies.length; i++ ) {
-
-      var angle =  this.direction + verticies[i][0];
-      var radius = verticies[i][1];
-      var x = this.pos[0] + radius * Math.cos(angle);
-      var y = this.pos[1] + radius * Math.sin(angle);
+    for (var i = 1; i < this.verticies.length; i++ ) {
+      x = points[i][0];
+      y = points[i][1];
 
       ctx.lineTo(x, y);
     }
     ctx.closePath();
 
     ctx.stroke();
-  }
+  };
 
   Ship.prototype.drawThrusterFlame = function(ctx) {
     ctx.lineWidth = 3;
@@ -75,11 +86,11 @@
 
     ctx.stroke();
     ctx.fill();
-  }
+  };
 
   Ship.createShip = function () {
     return new Ship();
-  }
+  };
 
   Ship.prototype.move = function (time) {
     this.updateDirection(time);
@@ -87,7 +98,7 @@
 
     this.pos[0] = this.pos[0] + this.vel[0] * time;
     this.pos[1] = this.pos[1] + this.vel[1] * time;
-  }
+  };
 
   Ship.prototype.updateVelocity = function(time) {
     Ship.power = key.isPressed("up");
@@ -96,7 +107,7 @@
 
     this.vel[0] = this.vel[0] + impulseX * time;
     this.vel[1] = this.vel[1] + impulseY * time;
-  }
+  };
 
   Ship.prototype.updateDirection = function(time){
     var turn = 0;
@@ -107,7 +118,7 @@
       turn += (Math.PI * time) / 30;
     };
     this.direction += turn;
-  }
+  };
 
   Ship.prototype.fireBullet = function() {
 
@@ -124,7 +135,28 @@
                                         [velX, velY],
                                         [dirX, dirY]);
     return bullet;
-  }
+  };
 
+  Ship.prototype.isCollidedWith = function(object) {
+    var points = this.pointsInContext();
+
+    var previousPoint = points[points.length - 1];
+    for( var i = 0; i < points.length; i++ ) {
+      var currentPoint = points[i];
+      var segment = [previousPoint, currentPoint];
+      var nearestPointOnLineSegment = VM.nearestPointOnLineSegmentToGivenPoint(segment, object.pos);
+      var objectVector = VM.vectorSubtraction(object.pos, nearestPointOnLineSegment);
+      var objectDistance = VM.vectorMagnitude(objectVector);
+
+      console.log(objectDistance);
+      if (objectDistance < object.radius) {
+        return true;
+      }
+
+      previousPoint = currentPoint;
+    };
+
+    return false;
+  };
 
 })(this);
