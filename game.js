@@ -128,7 +128,7 @@
     collisions = AG.Tick.detectBulletAsteroidCollisions(AG.game)
     asteroidsToRemove = collisions[0];
 
-    if (AG.bulletsDie === "true") {
+    if (AG.bulletsDie === true) {
       bulletsToRemove = collisions[1];
       AG.Tick.removeCollidingBullets(AG.game, bulletsToRemove);
     }
