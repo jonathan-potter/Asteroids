@@ -148,7 +148,6 @@
       var objectVector = VM.vectorSubtraction(object.pos, nearestPointOnLineSegment);
       var objectDistance = VM.vectorMagnitude(objectVector);
 
-      console.log(objectDistance);
       if (objectDistance < object.radius) {
         return true;
       }

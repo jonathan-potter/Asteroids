@@ -35,4 +35,10 @@ $(document).ready( function () {
     AG.game.reset();
     this.blur();
   })
+
+  AG.spawnLimit = 5;
+  AG.bulletsDie = false;
+  AG.shipDies = true;
+  AG.hitPoints = 6;
+  AG.bulletRadius = 3;
 });
